@@ -3,7 +3,7 @@
 # msbuild-Contrib.MSBuild.TypeLibrary
 
 | [![Build status](https://img.shields.io/appveyor/ci/dittodhole/msbuild-contrib-msbuild-typelibrary.svg)](https://ci.appveyor.com/project/dittodhole/msbuild-contrib-msbuild-typelibrary) | [![NuGet Status](https://img.shields.io/nuget/v/Contrib.MSBuild.TypeLibrary.svg)](https://www.nuget.org/packages/Contrib.MSBuild.TypeLibrary) | [![MyGet Pre Release](https://img.shields.io/myget/dittodhole/vpre/Contrib.MSBuild.TypeLibrary.svg)](https://www.myget.org/feed/dittodhole/package/nuget/Contrib.MSBuild.TypeLibrary)
-|:-|:-|:-|:-|
+|:-|:-|:-|
 
 > Create _.tlb_-files ([Type Library](https://msdn.microsoft.com/en-us/library/windows/desktop/aa366757)) upon compilation.
 
