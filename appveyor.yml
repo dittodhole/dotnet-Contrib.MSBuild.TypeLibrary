@@ -1,9 +1,11 @@
 version: '{build}-{branch}'
 skip_tags: true
+before_build:
+- cmd: cd build
 build_script:
-- ps: .\build\build.ps1
+- ps: .\build.ps1
 after_build:
-- cmd: appveyor PushArtifact "artifacts/*"
+- cmd: appveyor PushArtifact "../artifacts/*"
 test: off
 deploy:
 - provider: NuGet
