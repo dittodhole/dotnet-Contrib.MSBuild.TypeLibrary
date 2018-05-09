@@ -5,7 +5,8 @@ before_build:
 build_script:
 - ps: .\build.ps1
 after_build:
-- cmd: appveyor PushArtifact "../artifacts/*"
+- cmd: cd ..
+- cmd: appveyor PushArtifact "artifacts\*"
 test: off
 deploy:
 - provider: NuGet
