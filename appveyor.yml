@@ -1,5 +1,4 @@
 version: '{build}-{branch}'
-skip_tags: true
 before_build:
 - cmd: cd build
 build_script:
