@@ -34,12 +34,11 @@ Task("Build:Artifacts")
 
   var nuGetPackSettings = new NuGetPackSettings
   {
+    Id = "Contrib.MSBuild.TypeLibrary",
+    Version = version,
+    DevelopmentDependency = true,
     OutputDirectory = artifactsDirectory,
-    Properties = new Dictionary<string, string>
-    {
-      { "Version", version }
-    },
-    ArgumentCustomization = arguments => arguments.Append("-ForceEnglishOutput")
+    KeepTemporaryNuSpecFile = true
   };
 
   NuGetPack(nuspecFilePath,
