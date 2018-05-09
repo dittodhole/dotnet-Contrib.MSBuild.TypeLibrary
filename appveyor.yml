@@ -1,4 +1,5 @@
 version: '{build}-{branch}'
+skip_tags: true 
 before_build:
 - cmd: cd build
 build_script:
@@ -19,18 +20,23 @@ deploy:
   artifact: nupkg
   on:
     branch: master
-- provider: GitHub
-  name: GitHub
-  artifact: nupkg
-  on:
-    branch: master
+#- provider: GitHub
+#  name: GitHub
+#  auth_token:
+#    secure: EVBqwyd8nfpxK0GD8CfTMBOXK/4CSBkINYKHNTyOl90kXb1lprRbGzAjl4RXbTII
+#  artifact: nupkg
+#  on:
+#    branch: master
+#  tag: $(GITVERSION)
+#  release: $(GITVERSION)
+#  description: Release $(GITVERSION)
 - provider: NuGet
   name: NuGet (pre release)
   api_key:
     secure: 4Vg2LsDg84QSE6hpB1KKigaSpoywvjy8XDAHrv/NB5PTF7VLCUIQkQZMa6qOTxIs
   artifact: nupkg
   on:
-    branch: v.*
+    branch: v\d\.\d\.\d
 - provider: NuGet
   name: MyGet
   server: https://www.myget.org/F/dittodhole/api/v2/package
