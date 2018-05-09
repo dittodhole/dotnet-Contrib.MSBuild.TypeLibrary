@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <BuildDependsOn>
+      $(BuildDependsOn);
+      BuildTypeLibrary;
+      BuildAssemblyRegistration;
+    </BuildDependsOn>
+    <__ToolsPath />
+    <TypeLibraryTargetName>$(TargetDir)$(TargetName).tlb</TypeLibraryTargetName>
+    <AssemblyRegistrationTargetName>$(TargetDir)$(TargetName).reg</AssemblyRegistrationTargetName>
+  </PropertyGroup>
+  <ItemGroup>
+    <FileWrites Include="$(TypeLibraryTargetName);$(AssemblyRegistrationTargetName)" />
+  </ItemGroup>
+  <Target Name="BuildTypeLibrary">
+    <PropertyGroup>
+      <__ToolsPath>$(SDK40ToolsPath)</__ToolsPath>
+      <__ToolsPath Condition="$(__ToolsPath) == ''">$(SDK35ToolsPath)</__ToolsPath>
+      <__tlbExpPath>$(__ToolsPath)tlbexp.exe</__tlbExpPath>
+    </PropertyGroup>
+    <Error Text="Could not find &quot;$(__tlbExpPath)&quot;"
+           Condition="!Exists('$(__tlbExpPath)')" />
+    <Message Text="Using &quot;$(__tlbExpPath)&quot; to generate &quot;$(TypeLibraryTargetName)&quot;" />
+    <Exec Command="&quot;$(__tlbExpPath)&quot; &quot;$(TargetPath)&quot; /out:&quot;$(TypeLibraryTargetName)&quot;" />
+  </Target>
+  <Target Name="BuildAssemblyRegistration">
+    <PropertyGroup>
+      <__regasmPath>$(MSBuildFrameworkToolsPath)regasm.exe</__regasmPath>
+    </PropertyGroup>
+    <Error Text="Could not find &quot;$(__regasmPath)&quot;"
+           Condition="!Exists('$(__regasmPath)')" />
+    <Message Text="Using &quot;$(__regasmPath)&quot; to generate &quot;$(AssemblyRegistrationTargetName)&quot;" />
+    <Exec Command="&quot;$(__regasmPath)&quot; &quot;$(TargetPath)&quot; /regfile:&quot;$(AssemblyRegistrationTargetName)&quot;" />
+  </Target>
+  <PropertyGroup>
+    <CleanDependsOn>
+      $(CleanDependsOn);
+      CleanTypeLibrary;
+      CleanAssemblyRegistration;
+    </CleanDependsOn>
+  </PropertyGroup>
+  <Target Name="CleanTypeLibrary">
+    <Delete Files="$(TypeLibraryTargetName)" />
+  </Target>
+  <Target Name="CleanAssemblyRegistration">
+    <Delete Files="$(AssemblyRegistrationTargetName)" />
+  </Target>
+</Project>

@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>Contrib.MSBuild.TypeLibrary</id>
+    <version>$version$</version>
+    <authors>dittodhole</authors>
+    <licenseUrl>https://raw.githubusercontent.com/dittodhole/WTFNMFPLv3/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/dittodhole/msbuild-Contrib.MSBuild.TypeLibrary</projectUrl>
+    <iconUrl>https://github.com/dittodhole/msbuild-Contrib.MSBuild.TypeLibrary/raw/master/assets/noun_181229_cc.png</iconUrl>
+    <description>Create .tlb-files upon compilation.</description>
+    <developmentDependency>true</developmentDependency>
+  </metadata>
+  <files>
+    <file src="build\Contrib.MSBuild.TypeLibrary.targets" target="build" />
+  </files>
+</package>
