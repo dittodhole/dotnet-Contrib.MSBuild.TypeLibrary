@@ -1,4 +1,4 @@
-#tool "nuget:?package=GitVersion.CommandLine"
+#tool "nuget:?package=GitVersion.CommandLine&version=3.6.5"
 
 var sourceDirectory = Directory("../src");
 var nuspecFilePath = sourceDirectory + File("Contrib.MSBuild.TypeLibrary.nuspec");
@@ -11,7 +11,7 @@ var artifactsDirectory = Directory("../artifacts");
 Task("Clean:Artifacts")
   .Does(() =>
 {
-  Information($"Cleaning {MakeAbsolute(artifactsDirectory)}.");
+  Information($"Cleaning '{MakeAbsolute(artifactsDirectory)}'.");
 
   if (DirectoryExists(artifactsDirectory)) {
     DeleteDirectory(artifactsDirectory,
@@ -30,7 +30,7 @@ Task("Build:Artifacts")
   var gitVersion = GitVersion();
   var version = gitVersion.NuGetVersionV2;
 
-  Information($"Packaging {MakeAbsolute(nuspecFilePath)} ({version}) to {MakeAbsolute(artifactsDirectory)}.");
+  Information($"Packaging '{MakeAbsolute(nuspecFilePath)}' ({version}) to '{MakeAbsolute(artifactsDirectory)}'.");
 
   var nuGetPackSettings = new NuGetPackSettings
   {
