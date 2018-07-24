@@ -11,12 +11,10 @@
   </PropertyGroup>
   <Import Project="$(ProjectDir)Contrib.MSBuild.TypeLibrary.props" />
   <PropertyGroup Condition="$(ContribMSBuildTypeLibraryTlbExpPath) == ''">
-    <__ToolsPath>$(SDK40ToolsPath)</__ToolsPath>
-    <__ToolsPath Condition="$(__ToolsPath) == ''">$(SDK35ToolsPath)</__ToolsPath>
-    <ContribMSBuildTypeLibraryTlbExpPath>$(__ToolsPath)tlbexp.exe</ContribMSBuildTypeLibraryTlbExpPath>
+    <ContribMSBuildTypeLibraryTlbExpPath>$(TargetFrameworkSDKToolsDirectory)tlbexp.exe</ContribMSBuildTypeLibraryTlbExpPath>
   </PropertyGroup>
   <PropertyGroup Condition="$(ContribMSBuildTypeLibraryRegasmPath) == ''">
-    <__regasmPath>$(MSBuildFrameworkToolsPath)regasm.exe</__regasmPath>
+    <__regasmPath>$(FrameworkDir)\RegAsm.exe</__regasmPath>
   </PropertyGroup>
   <ItemGroup>
     <FileWrites Include="$(ContribMSBuildTypeLibraryTypeLibraryTargetPath);$(ContribMSBuildTypeLibraryAssemblyRegistrationTargetPath)" />
