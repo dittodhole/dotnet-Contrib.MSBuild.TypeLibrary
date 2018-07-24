@@ -18,7 +18,7 @@ PM> Install-Package -Id Contrib.MSBuild.TypeLibrary -pre --source https://www.my
 ### [nuget.org][3]
 
 [![](https://img.shields.io/appveyor/ci/dittodhole/msbuild-contrib-msbuild-typelibrary/master.svg)][4]
-[![](https://img.shields.io/nuget/v/Contrib.MSBuild.TypeLibrary.svg.svg)][3]
+[![](https://img.shields.io/nuget/v/Contrib.MSBuild.TypeLibrary.svg)][3]
 
 ```powershell
 PM> Install-Package -Id Contrib.MSBuild.TypeLibrary
