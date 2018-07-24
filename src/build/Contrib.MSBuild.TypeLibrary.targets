@@ -10,16 +10,13 @@
     <ContribMSBuildTypeLibraryBuildAssemblyRegistrationAfterTargets>Build</ContribMSBuildTypeLibraryBuildAssemblyRegistrationAfterTargets>
   </PropertyGroup>
   <Import Project="$(ProjectDir)Contrib.MSBuild.TypeLibrary.props" />
-  <PropertyGroup Condition="$(ContribMSBuildTypeLibraryTlbExpPath) == ''">
-    <ContribMSBuildTypeLibraryTlbExpPath>$(TargetFrameworkSDKToolsDirectory)tlbexp.exe</ContribMSBuildTypeLibraryTlbExpPath>
-  </PropertyGroup>
-  <PropertyGroup Condition="$(ContribMSBuildTypeLibraryRegAsmPath) == ''">
-    <ContribMSBuildTypeLibraryRegAsmPath>$(FrameworkDir)\RegAsm.exe</ContribMSBuildTypeLibraryRegAsmPath>
-  </PropertyGroup>
   <ItemGroup>
     <FileWrites Include="$(ContribMSBuildTypeLibraryTypeLibraryTargetPath);$(ContribMSBuildTypeLibraryAssemblyRegistrationTargetPath)" />
   </ItemGroup>
   <Target Name="ContribMSBuildTypeLibraryBuildTypeLibrary" BeforeTargets="$(ContribMSBuildTypeLibraryBuildTypeLibraryBeforeTargets)" AfterTargets="$(ContribMSBuildTypeLibraryBuildTypeLibraryAfterTargets)" Condition="$(ContribMSBuildTypeLibraryActive)">
+    <PropertyGroup Condition="$(ContribMSBuildTypeLibraryTlbExpPath) == ''">
+      <ContribMSBuildTypeLibraryTlbExpPath>$(TargetFrameworkSDKToolsDirectory)TlbExp.exe</ContribMSBuildTypeLibraryTlbExpPath>
+    </PropertyGroup>
     <Error Text="Could not find &quot;$(ContribMSBuildTypeLibraryTlbExpPath)&quot;" Condition="!Exists($(ContribMSBuildTypeLibraryTlbExpPath))" />
     <Message Text="TlbExp:               $(ContribMSBuildTypeLibraryTlbExpPath)" />
     <Message Text="Assembly:             $(ContribMSBuildTypeLibrarySourcePath)" />
@@ -27,6 +24,10 @@
     <Exec Command="&quot;$(ContribMSBuildTypeLibraryTlbExpPath)&quot; &quot;$(ContribMSBuildTypeLibrarySourcePath)&quot; /out:&quot;$(ContribMSBuildTypeLibraryTypeLibraryTargetPath)&quot;" />
   </Target>
   <Target Name="ContribMSBuildTypeLibraryBuildAssemblyRegistration" BeforeTargets="$(ContribMSBuildTypeLibraryBuildAssemblyRegistrationBeforeTargets)" AfterTargets="$(ContribMSBuildTypeLibraryBuildAssemblyRegistrationAfterTargets)" Condition="$(ContribMSBuildTypeLibraryActive)">
+    <PropertyGroup Condition="$(ContribMSBuildTypeLibraryRegAsmPath) == ''">
+      <_TargetFrameworkDirectory>$(TargetFrameworkDirectory.Split(';')[0])</_TargetFrameworkDirectory>
+      <ContribMSBuildTypeLibraryRegAsmPath>$(_TargetFrameworkDirectory)RegAsm.exe</ContribMSBuildTypeLibraryRegAsmPath>
+    </PropertyGroup>
     <Error Text="Could not find &quot;$(ContribMSBuildTypeLibraryRegAsmPath)&quot;" Condition="!Exists('$(ContribMSBuildTypeLibraryRegAsmPath)')" />
     <Message Text="RegAsm:               $(ContribMSBuildTypeLibraryRegAsmPath)" />
     <Message Text="Assembly:             $(ContribMSBuildTypeLibrarySourcePath)" />
