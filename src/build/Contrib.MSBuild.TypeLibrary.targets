@@ -13,8 +13,8 @@
   <PropertyGroup Condition="$(ContribMSBuildTypeLibraryTlbExpPath) == ''">
     <ContribMSBuildTypeLibraryTlbExpPath>$(TargetFrameworkSDKToolsDirectory)tlbexp.exe</ContribMSBuildTypeLibraryTlbExpPath>
   </PropertyGroup>
-  <PropertyGroup Condition="$(ContribMSBuildTypeLibraryRegasmPath) == ''">
-    <__regasmPath>$(FrameworkDir)\RegAsm.exe</__regasmPath>
+  <PropertyGroup Condition="$(ContribMSBuildTypeLibraryRegAsmPath) == ''">
+    <ContribMSBuildTypeLibraryRegAsmPath>$(FrameworkDir)\RegAsm.exe</__regasmPath>
   </PropertyGroup>
   <ItemGroup>
     <FileWrites Include="$(ContribMSBuildTypeLibraryTypeLibraryTargetPath);$(ContribMSBuildTypeLibraryAssemblyRegistrationTargetPath)" />
@@ -27,11 +27,11 @@
     <Exec Command="&quot;$(ContribMSBuildTypeLibraryTlbExpPath)&quot; &quot;$(ContribMSBuildTypeLibrarySourcePath)&quot; /out:&quot;$(ContribMSBuildTypeLibraryTypeLibraryTargetPath)&quot;" />
   </Target>
   <Target Name="ContribMSBuildTypeLibraryBuildAssemblyRegistration" BeforeTargets="$(ContribMSBuildTypeLibraryBuildAssemblyRegistrationBeforeTargets)" AfterTargets="$(ContribMSBuildTypeLibraryBuildAssemblyRegistrationAfterTargets)" Condition="$(ContribMSBuildTypeLibraryActive)">
-    <Error Text="Could not find &quot;$(ContribMSBuildTypeLibraryRegasmPath)&quot;" Condition="!Exists('$(ContribMSBuildTypeLibraryRegasmPath)')" />
-    <Message Text="Regasm:               $(ContribMSBuildTypeLibraryRegasmPath)" />
+    <Error Text="Could not find &quot;$(ContribMSBuildTypeLibraryRegAsmPath)&quot;" Condition="!Exists('$(ContribMSBuildTypeLibraryRegAsmPath)')" />
+    <Message Text="Regasm:               $(ContribMSBuildTypeLibraryRegAsmPath)" />
     <Message Text="Source:               $(ContribMSBuildTypeLibrarySourcePath)" />
     <Message Text="Reg file:             $(ContribMSBuildTypeLibraryAssemblyRegistrationTargetPath)" />
-    <Exec Command="&quot;$(ContribMSBuildTypeLibraryRegasmPath)&quot; &quot;$(ContribMSBuildTypeLibrarySourcePath)&quot; /regfile:&quot;$(ContribMSBuildTypeLibraryAssemblyRegistrationTargetPath)&quot;" />
+    <Exec Command="&quot;$(ContribMSBuildTypeLibraryRegAsmPath)&quot; &quot;$(ContribMSBuildTypeLibrarySourcePath)&quot; /regfile:&quot;$(ContribMSBuildTypeLibraryAssemblyRegistrationTargetPath)&quot;" />
   </Target>
   <PropertyGroup>
     <CleanDependsOn>
