@@ -8,8 +8,8 @@
 
 ### [myget.org][1]
 
-[![](https://img.shields.io/appveyor/ci/dittodhole/dotnet-contrib-system-printing-xps/develop.svg)][2]
-[![](https://img.shields.io/myget/dittodhole/vpre/Contrib.System.Printing.Xps.svg)][1]
+[![](https://img.shields.io/appveyor/ci/dittodhole/msbuild-contrib-msbuild-typelibrary/develop.svg)][2]
+[![](https://img.shields.io/myget/dittodhole/vpre/Contrib.MSBuild.TypeLibrary.svg)][1]
 
 ```powershell
 PM> Install-Package -Id Contrib.MSBuild.TypeLibrary -pre --source https://www.myget.org/F/dittodhole/api/v2
@@ -17,8 +17,8 @@ PM> Install-Package -Id Contrib.MSBuild.TypeLibrary -pre --source https://www.my
 
 ### [nuget.org][3]
 
-[![](https://img.shields.io/appveyor/ci/dittodhole/dotnet-contrib-system-printing-xps/master.svg)][4]
-[![](https://img.shields.io/nuget/v/Contrib.System.Printing.Xps.svg)][3]
+[![](https://img.shields.io/appveyor/ci/dittodhole/msbuild-contrib-msbuild-typelibrary/master.svg)][4]
+[![](https://img.shields.io/nuget/v/Contrib.MSBuild.TypeLibrary.svg.svg)][3]
 
 ```powershell
 PM> Install-Package -Id Contrib.MSBuild.TypeLibrary
