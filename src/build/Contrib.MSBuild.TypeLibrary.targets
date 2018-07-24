@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <__ToolsPath />
-    <TypeLibraryTargetName>$(TargetDir)$(TargetName).tlb</TypeLibraryTargetName>
-    <AssemblyRegistrationTargetName>$(TargetDir)$(TargetName).reg</AssemblyRegistrationTargetName>
+    <ContribMSBuildTypeLibrarySourcePath>$(TargetPath)</ContribMSBuildTypeLibrarySourcePath>
+    <ContribMSBuildTypeLibraryTypeLibraryTargetPath>$(TargetDir)$(TargetName).tlb</ContribMSBuildTypeLibraryTypeLibraryTargetPath>
+    <ContribMSBuildTypeLibraryAssemblyRegistrationTargetPath>$(TargetDir)$(TargetName).reg</ContribMSBuildTypeLibraryAssemblyRegistrationTargetPath>
   </PropertyGroup>
   <ItemGroup>
-    <FileWrites Include="$(TypeLibraryTargetName);$(AssemblyRegistrationTargetName)" />
+    <FileWrites Include="$(ContribMSBuildTypeLibraryTypeLibraryTargetPath);$(ContribMSBuildTypeLibraryAssemblyRegistrationTargetPath)" />
   </ItemGroup>
   <Target Name="BuildTypeLibrary"  AfterTargets="Build">
     <PropertyGroup>
@@ -16,8 +16,8 @@
     </PropertyGroup>
     <Error Text="Could not find &quot;$(__tlbExpPath)&quot;"
            Condition="!Exists('$(__tlbExpPath)')" />
-    <Message Text="Using &quot;$(__tlbExpPath)&quot; to generate &quot;$(TypeLibraryTargetName)&quot;" />
-    <Exec Command="&quot;$(__tlbExpPath)&quot; &quot;$(TargetPath)&quot; /out:&quot;$(TypeLibraryTargetName)&quot;" />
+    <Message Text="Using &quot;$(__tlbExpPath)&quot; to generate &quot;$(ContribMSBuildTypeLibraryTypeLibraryTargetPath)&quot;" />
+    <Exec Command="&quot;$(__tlbExpPath)&quot; &quot;$(ContribMSBuildTypeLibrarySourcePath)&quot; /out:&quot;$(ContribMSBuildTypeLibraryTypeLibraryTargetPath)&quot;" />
   </Target>
   <Target Name="BuildAssemblyRegistration" AfterTargets="Build">
     <PropertyGroup>
@@ -25,8 +25,8 @@
     </PropertyGroup>
     <Error Text="Could not find &quot;$(__regasmPath)&quot;"
            Condition="!Exists('$(__regasmPath)')" />
-    <Message Text="Using &quot;$(__regasmPath)&quot; to generate &quot;$(AssemblyRegistrationTargetName)&quot;" />
-    <Exec Command="&quot;$(__regasmPath)&quot; &quot;$(TargetPath)&quot; /regfile:&quot;$(AssemblyRegistrationTargetName)&quot;" />
+    <Message Text="Using &quot;$(__regasmPath)&quot; to generate &quot;$(ContribMSBuildTypeLibraryAssemblyRegistrationTargetPath)&quot;" />
+    <Exec Command="&quot;$(__regasmPath)&quot; &quot;$(ContribMSBuildTypeLibrarySourcePath)&quot; /regfile:&quot;$(ContribMSBuildTypeLibraryAssemblyRegistrationTargetPath)&quot;" />
   </Target>
   <PropertyGroup>
     <CleanDependsOn>
@@ -36,9 +36,9 @@
     </CleanDependsOn>
   </PropertyGroup>
   <Target Name="CleanTypeLibrary">
-    <Delete Files="$(TypeLibraryTargetName)" />
+    <Delete Files="$(ContribMSBuildTypeLibraryTypeLibraryTargetPath)" />
   </Target>
   <Target Name="CleanAssemblyRegistration">
-    <Delete Files="$(AssemblyRegistrationTargetName)" />
+    <Delete Files="$(ContribMSBuildTypeLibraryAssemblyRegistrationTargetPath)" />
   </Target>
 </Project>
