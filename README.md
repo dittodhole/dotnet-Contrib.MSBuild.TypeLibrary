@@ -46,6 +46,6 @@ msbuild-Contrib.MSBuild.TypeLibrary is published under [WTFNMFPLv3](https://gith
 [Interoperability](https://thenounproject.com/term/interoperability/181229) by [anbileru adaleru](https://thenounproject.com/pronoun) from the Noun Project.
 
 [1]: https://www.myget.org/feed/dittodhole/package/nuget/Contrib.MSBuild.TypeLibrary
-[2]: https://ci.appveyor.com/project/dittodhole/msbuild-contrib-mbsuild-typelibrary/branch/develop
+[2]: https://ci.appveyor.com/project/dittodhole/msbuild-contrib-msbuild-typelibrary/branch/develop
 [3]: https://www.nuget.org/packages/Contrib.MSBuild.TypeLibrary
-[4]: https://ci.appveyor.com/project/dittodhole/msbuild-contrib-mbsuild-typelibrary/branch/master
+[4]: https://ci.appveyor.com/project/dittodhole/msbuild-contrib-msbuild-typelibrary/branch/master
