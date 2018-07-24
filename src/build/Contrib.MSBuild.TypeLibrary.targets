@@ -33,17 +33,4 @@
     <Message Text="Reg file:             $(ContribMSBuildTypeLibraryAssemblyRegistrationTargetPath)" />
     <Exec Command="&quot;$(ContribMSBuildTypeLibraryRegAsmPath)&quot; &quot;$(ContribMSBuildTypeLibrarySourcePath)&quot; /regfile:&quot;$(ContribMSBuildTypeLibraryAssemblyRegistrationTargetPath)&quot;" />
   </Target>
-  <PropertyGroup>
-    <CleanDependsOn>
-      $(CleanDependsOn);
-      CleanTypeLibrary;
-      CleanAssemblyRegistration;
-    </CleanDependsOn>
-  </PropertyGroup>
-  <Target Name="CleanTypeLibrary">
-    <Delete Files="$(ContribMSBuildTypeLibraryTypeLibraryTargetPath)" />
-  </Target>
-  <Target Name="CleanAssemblyRegistration">
-    <Delete Files="$(ContribMSBuildTypeLibraryAssemblyRegistrationTargetPath)" />
-  </Target>
 </Project>
