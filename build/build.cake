@@ -37,8 +37,7 @@ Task("Build:Artifacts")
     Id = "Contrib.MSBuild.TypeLibrary",
     Version = version,
     DevelopmentDependency = true,
-    OutputDirectory = artifactsDirectory,
-    KeepTemporaryNuSpecFile = true
+    OutputDirectory = artifactsDirectory
   };
 
   NuGetPack(nuspecFilePath,
