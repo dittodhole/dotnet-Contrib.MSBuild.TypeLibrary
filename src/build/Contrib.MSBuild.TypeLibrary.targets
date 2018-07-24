@@ -8,7 +8,7 @@
   <ItemGroup>
     <FileWrites Include="$(TypeLibraryTargetName);$(AssemblyRegistrationTargetName)" />
   </ItemGroup>
-  <Target Name="BuildTypeLibrary">
+  <Target Name="BuildTypeLibrary"  AfterTargets="Build">
     <PropertyGroup>
       <__ToolsPath>$(SDK40ToolsPath)</__ToolsPath>
       <__ToolsPath Condition="$(__ToolsPath) == ''">$(SDK35ToolsPath)</__ToolsPath>
