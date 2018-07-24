@@ -1,17 +1,14 @@
 version: '{build}-{branch}'
-skip_tags: true 
+image: Visual Studio 2017
+skip_tags: true
 before_build:
 - cmd: cd build
 build_script:
 - ps: .\build.ps1
-test: off
 artifacts:
-- path: artifacts\*.nupkg
+- path: artifacts/*.nupkg
   name: nupkg
   type: File
-nuget:
-  account_feed: true
-  project_feed: true
 deploy:
 - provider: NuGet
   name: NuGet
@@ -20,16 +17,6 @@ deploy:
   artifact: nupkg
   on:
     branch: master
-#- provider: GitHub
-#  name: GitHub
-#  auth_token:
-#    secure: EVBqwyd8nfpxK0GD8CfTMBOXK/4CSBkINYKHNTyOl90kXb1lprRbGzAjl4RXbTII
-#  artifact: nupkg
-#  on:
-#    branch: master
-#  tag: $(GITVERSION)
-#  release: $(GITVERSION)
-#  description: Release $(GITVERSION)
 - provider: NuGet
   name: NuGet (pre release)
   api_key:
@@ -44,3 +31,4 @@ deploy:
     secure: c9r6oyxFOqnfj0xezZcLIoopgoBUb5ib9nrTYMkXDTqzvMrrXmprbHgyldag6NZ4
   artifact: nupkg
   symbol_server: https://www.myget.org/F/dittodhole/symbols/api/v2/package
+  
