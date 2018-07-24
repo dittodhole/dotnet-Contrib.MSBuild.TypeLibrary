@@ -26,7 +26,7 @@ PM> Install-Package -Id Contrib.MSBuild.TypeLibrary
 
 ## Developing & Building
 
-```cmd
+```powershell
 PS \> git clone https://github.com/dittodhole/msbuild-Contrib.MSBuild.TypeLibrary.git
 PS \> cd msbuild-Contrib.MSBuild.TypeLibrary
 PS \msbuild-Contrib.MSBuild.TypeLibrary> cd build
