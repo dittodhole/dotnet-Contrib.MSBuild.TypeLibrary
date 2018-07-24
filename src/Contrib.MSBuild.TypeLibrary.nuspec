@@ -8,10 +8,10 @@
     <projectUrl>https://github.com/dittodhole/msbuild-Contrib.MSBuild.TypeLibrary</projectUrl>
     <iconUrl>https://cdn.rawgit.com/dittodhole/msbuild-Contrib.MSBuild.TypeLibrary/master/assets/noun_181229_cc.png</iconUrl>
     <description>Create .tlb-files upon compilation.</description>
-    <developmentDependency/>
-    <requireLicenseAcceptance/>
+    <developmentDependency>true</developmentDependency>
   </metadata>
   <files>
     <file src="build\Contrib.MSBuild.TypeLibrary.targets" target="build" />
+    <file src="content\Contrib.MSBuild.TypeLibrary.props" target="content" />
   </files>
 </package>
