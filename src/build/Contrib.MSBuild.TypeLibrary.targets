@@ -1,37 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <BuildDependsOn>
-      $(BuildDependsOn);
-      BuildTypeLibrary;
-      BuildAssemblyRegistration;
-    </BuildDependsOn>
-    <__ToolsPath />
-    <TypeLibraryTargetName>$(TargetDir)$(TargetName).tlb</TypeLibraryTargetName>
-    <AssemblyRegistrationTargetName>$(TargetDir)$(TargetName).reg</AssemblyRegistrationTargetName>
+    <ContribMSBuildTypeLibrarySourcePath>$(TargetPath)</ContribMSBuildTypeLibrarySourcePath>
+    <ContribMSBuildTypeLibraryTypeLibraryTargetPath>$(TargetDir)$(TargetName).tlb</ContribMSBuildTypeLibraryTypeLibraryTargetPath>
+    <ContribMSBuildTypeLibraryAssemblyRegistrationTargetPath>$(TargetDir)$(TargetName).reg</ContribMSBuildTypeLibraryAssemblyRegistrationTargetPath>
+    <ContribMSBuildTypeLibraryBuildTypeLibraryBeforeTargets></ContribMSBuildTypeLibraryBuildTypeLibraryBeforeTargets>
+    <ContribMSBuildTypeLibraryBuildTypeLibraryAfterTargets>Build</ContribMSBuildTypeLibraryBuildTypeLibraryAfterTargets>
+    <ContribMSBuildTypeLibraryBuildAssemblyRegistrationBeforeTargets></ContribMSBuildTypeLibraryBuildAssemblyRegistrationBeforeTargets>
+    <ContribMSBuildTypeLibraryBuildAssemblyRegistrationAfterTargets>Build</ContribMSBuildTypeLibraryBuildAssemblyRegistrationAfterTargets>
+  </PropertyGroup>
+  <Import Project="$(ProjectDir)Contrib.MSBuild.TypeLibrary.props" />
+  <PropertyGroup Condition="$(ContribMSBuildTypeLibraryTlbExpPath) == ''">
+    <__ToolsPath>$(SDK40ToolsPath)</__ToolsPath>
+    <__ToolsPath Condition="$(__ToolsPath) == ''">$(SDK35ToolsPath)</__ToolsPath>
+    <ContribMSBuildTypeLibraryTlbExpPath>$(__ToolsPath)tlbexp.exe</ContribMSBuildTypeLibraryTlbExpPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="$(ContribMSBuildTypeLibraryRegasmPath) == ''">
+    <__regasmPath>$(MSBuildFrameworkToolsPath)regasm.exe</__regasmPath>
   </PropertyGroup>
   <ItemGroup>
-    <FileWrites Include="$(TypeLibraryTargetName);$(AssemblyRegistrationTargetName)" />
+    <FileWrites Include="$(ContribMSBuildTypeLibraryTypeLibraryTargetPath);$(ContribMSBuildTypeLibraryAssemblyRegistrationTargetPath)" />
   </ItemGroup>
-  <Target Name="BuildTypeLibrary">
-    <PropertyGroup>
-      <__ToolsPath>$(SDK40ToolsPath)</__ToolsPath>
-      <__ToolsPath Condition="$(__ToolsPath) == ''">$(SDK35ToolsPath)</__ToolsPath>
-      <__tlbExpPath>$(__ToolsPath)tlbexp.exe</__tlbExpPath>
-    </PropertyGroup>
-    <Error Text="Could not find &quot;$(__tlbExpPath)&quot;"
-           Condition="!Exists('$(__tlbExpPath)')" />
-    <Message Text="Using &quot;$(__tlbExpPath)&quot; to generate &quot;$(TypeLibraryTargetName)&quot;" />
-    <Exec Command="&quot;$(__tlbExpPath)&quot; &quot;$(TargetPath)&quot; /out:&quot;$(TypeLibraryTargetName)&quot;" />
+  <Target Name="ContribMSBuildTypeLibraryBuildTypeLibrary" BeforeTargets="$(ContribMSBuildTypeLibraryBuildTypeLibraryBeforeTargets)" AfterTargets="$(ContribMSBuildTypeLibraryBuildTypeLibraryAfterTargets)" Condition="$(ContribMSBuildTypeLibraryActive)">
+    <Error Text="Could not find &quot;$(ContribMSBuildTypeLibraryTlbExpPath)&quot;" Condition="!Exists($(ContribMSBuildTypeLibraryTlbExpPath))" />
+    <Message Text="TlbExp:               $(ContribMSBuildTypeLibraryTlbExpPath)" />
+    <Message Text="Source:               $(ContribMSBuildTypeLibrarySourcePath)" />
+    <Message Text="Type Library:         $(ContribMSBuildTypeLibraryTypeLibraryTargetPath)" />
+    <Exec Command="&quot;$(ContribMSBuildTypeLibraryTlbExpPath)&quot; &quot;$(ContribMSBuildTypeLibrarySourcePath)&quot; /out:&quot;$(ContribMSBuildTypeLibraryTypeLibraryTargetPath)&quot;" />
   </Target>
-  <Target Name="BuildAssemblyRegistration">
-    <PropertyGroup>
-      <__regasmPath>$(MSBuildFrameworkToolsPath)regasm.exe</__regasmPath>
-    </PropertyGroup>
-    <Error Text="Could not find &quot;$(__regasmPath)&quot;"
-           Condition="!Exists('$(__regasmPath)')" />
-    <Message Text="Using &quot;$(__regasmPath)&quot; to generate &quot;$(AssemblyRegistrationTargetName)&quot;" />
-    <Exec Command="&quot;$(__regasmPath)&quot; &quot;$(TargetPath)&quot; /regfile:&quot;$(AssemblyRegistrationTargetName)&quot;" />
+  <Target Name="ContribMSBuildTypeLibraryBuildAssemblyRegistration" BeforeTargets="$(ContribMSBuildTypeLibraryBuildAssemblyRegistrationBeforeTargets)" AfterTargets="$(ContribMSBuildTypeLibraryBuildAssemblyRegistrationAfterTargets)" Condition="$(ContribMSBuildTypeLibraryActive)">
+    <Error Text="Could not find &quot;$(ContribMSBuildTypeLibraryRegasmPath)&quot;" Condition="!Exists('$(ContribMSBuildTypeLibraryRegasmPath)')" />
+    <Message Text="Regasm:               $(ContribMSBuildTypeLibraryRegasmPath)" />
+    <Message Text="Source:               $(ContribMSBuildTypeLibrarySourcePath)" />
+    <Message Text="Reg file:             $(ContribMSBuildTypeLibraryAssemblyRegistrationTargetPath)" />
+    <Exec Command="&quot;$(ContribMSBuildTypeLibraryRegasmPath)&quot; &quot;$(ContribMSBuildTypeLibrarySourcePath)&quot; /regfile:&quot;$(ContribMSBuildTypeLibraryAssemblyRegistrationTargetPath)&quot;" />
   </Target>
   <PropertyGroup>
     <CleanDependsOn>
@@ -41,9 +43,9 @@
     </CleanDependsOn>
   </PropertyGroup>
   <Target Name="CleanTypeLibrary">
-    <Delete Files="$(TypeLibraryTargetName)" />
+    <Delete Files="$(ContribMSBuildTypeLibraryTypeLibraryTargetPath)" />
   </Target>
   <Target Name="CleanAssemblyRegistration">
-    <Delete Files="$(AssemblyRegistrationTargetName)" />
+    <Delete Files="$(ContribMSBuildTypeLibraryAssemblyRegistrationTargetPath)" />
   </Target>
 </Project>
