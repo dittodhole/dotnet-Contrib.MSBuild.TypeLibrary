@@ -14,7 +14,7 @@
     <ContribMSBuildTypeLibraryTlbExpPath>$(TargetFrameworkSDKToolsDirectory)tlbexp.exe</ContribMSBuildTypeLibraryTlbExpPath>
   </PropertyGroup>
   <PropertyGroup Condition="$(ContribMSBuildTypeLibraryRegAsmPath) == ''">
-    <ContribMSBuildTypeLibraryRegAsmPath>$(FrameworkDir)\RegAsm.exe</__regasmPath>
+    <ContribMSBuildTypeLibraryRegAsmPath>$(FrameworkDir)\RegAsm.exe</ContribMSBuildTypeLibraryRegAsmPath>
   </PropertyGroup>
   <ItemGroup>
     <FileWrites Include="$(ContribMSBuildTypeLibraryTypeLibraryTargetPath);$(ContribMSBuildTypeLibraryAssemblyRegistrationTargetPath)" />
