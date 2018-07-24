@@ -27,7 +27,7 @@
     <Exec Command="&quot;$(ContribMSBuildTypeLibraryTlbExpPath)&quot; &quot;$(ContribMSBuildTypeLibrarySourcePath)&quot; /out:&quot;$(ContribMSBuildTypeLibraryTypeLibraryTargetPath)&quot;" />
   </Target>
   <Target Name="ContribMSBuildTypeLibraryBuildAssemblyRegistration" BeforeTargets="$(ContribMSBuildTypeLibraryBuildAssemblyRegistrationBeforeTargets)" AfterTargets="$(ContribMSBuildTypeLibraryBuildAssemblyRegistrationAfterTargets)" Condition="$(ContribMSBuildTypeLibraryActive)">
-    <Error Text="Could not find &quot;$(ContribMSBuildTypeLibraryRegAsmPath)&quot;" Condition="!Exists('$(ContribMSBuildTypeLibraryRegAsmPath)')" />
+    <Error Text="Could not find &quot;$(ContribMSBuildTypeLibraryRegAsmPath)&quot;" Condition="!Exists($(ContribMSBuildTypeLibraryRegAsmPath))" />
     <Message Text="RegAsm:               $(ContribMSBuildTypeLibraryRegAsmPath)" />
     <Message Text="Assembly:             $(ContribMSBuildTypeLibrarySourcePath)" />
     <Message Text="Output:               $(ContribMSBuildTypeLibraryAssemblyRegistrationTargetPath)" />
