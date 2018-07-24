@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <BuildDependsOn>
-      $(BuildDependsOn);
-      BuildTypeLibrary;
-      BuildAssemblyRegistration;
-    </BuildDependsOn>
     <__ToolsPath />
     <TypeLibraryTargetName>$(TargetDir)$(TargetName).tlb</TypeLibraryTargetName>
     <AssemblyRegistrationTargetName>$(TargetDir)$(TargetName).reg</AssemblyRegistrationTargetName>
@@ -24,7 +19,7 @@
     <Message Text="Using &quot;$(__tlbExpPath)&quot; to generate &quot;$(TypeLibraryTargetName)&quot;" />
     <Exec Command="&quot;$(__tlbExpPath)&quot; &quot;$(TargetPath)&quot; /out:&quot;$(TypeLibraryTargetName)&quot;" />
   </Target>
-  <Target Name="BuildAssemblyRegistration">
+  <Target Name="BuildAssemblyRegistration" AfterTargets="Build">
     <PropertyGroup>
       <__regasmPath>$(MSBuildFrameworkToolsPath)regasm.exe</__regasmPath>
     </PropertyGroup>
