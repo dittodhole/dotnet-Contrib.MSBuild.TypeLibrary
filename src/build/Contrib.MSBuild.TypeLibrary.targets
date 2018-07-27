@@ -25,8 +25,8 @@
   </Target>
   <Target Name="ContribMSBuildTypeLibraryBuildAssemblyRegistration" BeforeTargets="$(ContribMSBuildTypeLibraryBuildAssemblyRegistrationBeforeTargets)" AfterTargets="$(ContribMSBuildTypeLibraryBuildAssemblyRegistrationAfterTargets)" Condition="$(ContribMSBuildTypeLibraryActive)">
     <PropertyGroup Condition="$(ContribMSBuildTypeLibraryRegAsmPath) == ''">
-      <_TargetFrameworkDirectory>$([MSBuild]::EnsureTrailingSlash($(TargetFrameworkDirectory.Split(';')[0])))</_TargetFrameworkDirectory>
-      <ContribMSBuildTypeLibraryRegAsmPath>$(_TargetFrameworkDirectory)RegAsm.exe</ContribMSBuildTypeLibraryRegAsmPath>
+      <_FrameworkDir>$([MSBuild]::EnsureTrailingSlash($(FrameworkDir)))</_FrameworkDir>
+      <ContribMSBuildTypeLibraryRegAsmPath>$(_FrameworkDir)RegAsm.exe</ContribMSBuildTypeLibraryRegAsmPath>
     </PropertyGroup>
     <Error Text="Could not find &quot;$(ContribMSBuildTypeLibraryRegAsmPath)&quot;" Condition="!Exists('$(ContribMSBuildTypeLibraryRegAsmPath)')" />
     <Message Text="RegAsm:               $(ContribMSBuildTypeLibraryRegAsmPath)" />
