@@ -1,3 +1,10 @@
-artifacts/
+artifacts/*.nupkg
+build/build.ps1
 build/tools/
-src/Contrib\.MSBuild\.TypeLibrary\.nuspec
+src/.vs/
+src/packages/
+src/**/*.user
+src/**/*.suo
+src/*/bin/
+src/*/obj/
+src/*/*.temp.nuspec

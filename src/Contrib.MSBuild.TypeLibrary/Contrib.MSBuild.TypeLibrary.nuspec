@@ -6,13 +6,15 @@
     <authors>$author$</authors>
     <owners>dittodhole</owners>
     <licenseUrl>https://github.com/dittodhole/WTFNMFPLv3</licenseUrl>
-    <projectUrl>https://github.com/dittodhole/msbuild-Contrib.MSBuild.TypeLibrary</projectUrl>
-    <iconUrl>https://cdn.rawgit.com/dittodhole/msbuild-Contrib.MSBuild.TypeLibrary/$branch$/assets/noun_181229_cc.png</iconUrl>
+    <projectUrl>https://github.com/dittodhole/dotnet-Contrib.MSBuild.TypeLibrary</projectUrl>
+    <iconUrl>https://cdn.rawgit.com/dittodhole/dotnet-Contrib.MSBuild.TypeLibrary/$branch$/assets/noun_181229_cc.png</iconUrl>
     <description>Create .tlb-files upon compilation.</description>
     <developmentDependency>true</developmentDependency>
   </metadata>
   <files>
     <file src="build\Contrib.MSBuild.TypeLibrary.targets" target="build" />
+    <file src="build\GetRegAsmPath.cs" target="build"/>
+    <file src="build\GetTlbExpPath.cs" target="build"/>
     <file src="content\Contrib.MSBuild.TypeLibrary.props" target="content" />
   </files>
 </package>
