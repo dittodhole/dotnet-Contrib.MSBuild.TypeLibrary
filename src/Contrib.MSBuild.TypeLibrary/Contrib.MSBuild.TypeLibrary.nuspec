@@ -13,6 +13,8 @@
   </metadata>
   <files>
     <file src="build\Contrib.MSBuild.TypeLibrary.targets" target="build" />
+    <file src="build\GetRegAsmPath.cs" target="build"/>
+    <file src="build\GetTlbExpPath.cs" target="build"/>
     <file src="content\Contrib.MSBuild.TypeLibrary.props" target="content" />
   </files>
 </package>
