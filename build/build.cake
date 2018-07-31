@@ -1,117 +1,78 @@
-#addin "Cake.Incubator&version=2.0.2"
-#tool "nuget:?package=GitVersion.CommandLine&version=3.6.5"
+#tool "nuget:?package=GitVersion.CommandLine"
 
 var configuration = "Release";
-var tokens = new Dictionary<string, string>
-             {
-               { "Configuration", configuration },
-               { "branch", EnvironmentVariable("APPVEYOR_REPO_BRANCH") ?? "develop" },
-               { "author", "Andreas Niedermair (@dittodhole)" },
-               { "version", GitVersion().NuGetVersionV2 }
-             };
+var artifactsDirectory = Directory("../artifacts");
+var sourceDirectory = Directory("../src");
+var solutionFile = sourceDirectory + File("Contrib.MSBuild.TypeLibrary.sln");
+var projectFile = sourceDirectory + Directory("Contrib.MSBuild.TypeLibrary") + File("Contrib.MSBuild.TypeLibrary.csproj");
+var assemblyInfoFile = sourceDirectory + Directory("Contrib.MSBuild.TypeLibrary") +  Directory("Properties") + File("AssemblyInfo.cs");
 
-var sourcePath = "../src/";
-var sourceDirectory = Directory(sourcePath);
-var artifactsPath = "../artifacts/";
-var artifactsDirectory = Directory(artifactsPath);
-var nuspecFilePath = sourceDirectory + File("Contrib.MSBuild.TypeLibrary.nuspec");
-
-//////////////////////////////////////////////////////////////////////
-// ENVIRONMENT
-//////////////////////////////////////////////////////////////////////
-
-Task("Setup:Environment")
+Task("Build")
+  .IsDependentOn("Clean")
+  .IsDependentOn("Version")
+  .IsDependentOn("Restore")
   .Does(() =>
 {
-  ChocolateyInstall("VisualStudio2017Community");
+  Information($"Building {MakeAbsolute(solutionFile)}");
+
+  MSBuild(solutionFile,
+          settings => settings.SetConfiguration(configuration)
+                              .SetPlatformTarget(PlatformTarget.MSIL)
+                              .SetMaxCpuCount(0)
+                              .SetMSBuildPlatform(MSBuildPlatform.x86));
+
+  NuGetPack(projectFile,
+            new NuGetPackSettings
+            {
+              OutputToToolFolder = true,
+              Properties = new Dictionary<string, string>
+              {
+                { "Configuration", configuration },
+                { "branch", EnvironmentVariable("APPVEYOR_REPO_BRANCH") ?? "develop" }
+              },
+              IncludeReferencedProjects = true,
+              Symbols = true,
+              OutputDirectory = artifactsDirectory
+            });
 });
 
-//////////////////////////////////////////////////////////////////////
-// TEMPLATES
-//////////////////////////////////////////////////////////////////////
-
-Task("Clean:Templates")
+Task("Clean")
   .Does(() =>
 {
-  Information($"Cleaning output from templates.");
+  Information($"Cleaning {MakeAbsolute(artifactsDirectory)}");
 
-  var templateFilePaths = GetFiles(sourcePath + "**/*.tmpl");
-  foreach (var templateFilePath in templateFilePaths) {
-    var destinationFilePath = templateFilePath.ChangeExtension(string.Empty);
-    if (FileExists(destinationFilePath)) {
-      DeleteFile(destinationFilePath);
-    }
-  }
-});
-
-Task("Build:Templates")
-  .DoesForEach(() => GetFiles(sourcePath + "**/*.tmpl"),
-               templateFilePath =>
-{
-  var destinationFilePath = templateFilePath.ChangeExtension(string.Empty);
-
-  Information($"Building template '{MakeAbsolute(templateFilePath)}' to '{MakeAbsolute(destinationFilePath)}'.");
-
-  var textTransformation = TransformTextFile(templateFilePath, "$", "$");
-  foreach (var kvp in tokens) {
-    textTransformation.WithToken(kvp.Key, kvp.Value);
-  }
-
-  textTransformation.Save(destinationFilePath);
-});
-
-//////////////////////////////////////////////////////////////////////
-// ARTIFACTS
-//////////////////////////////////////////////////////////////////////
-
-Task("Clean:Artifacts")
-  .Does(() =>
-{
-  Information($"Cleaning '{MakeAbsolute(artifactsDirectory)}'.");
-
-  if (DirectoryExists(artifactsDirectory)) {
+  if (DirectoryExists(artifactsDirectory))
+  {
     DeleteDirectory(artifactsDirectory,
                     new DeleteDirectorySettings
                     {
-                      Recursive = true,
-                      Force = true
+                      Recursive = true
                     });
   }
 
   CreateDirectory(artifactsDirectory);
 });
 
-Task("Build:Artifacts")
-  .IsDependentOn("Build:Templates")
+Task("Version")
   .Does(() =>
 {
-  Information($"Packaging '{MakeAbsolute(nuspecFilePath)}' ({tokens["version"]}) to '{MakeAbsolute(artifactsDirectory)}'.");
+  Information($"Versioning {MakeAbsolute(solutionFile)}");
 
-  NuGetPack(nuspecFilePath,
-            new NuGetPackSettings
-            {
-              Properties = tokens,
-              OutputDirectory = artifactsDirectory,
-              DevelopmentDependency = true
-            });
+  GitVersion(new GitVersionSettings
+             {
+               UpdateAssemblyInfo = true,
+               UpdateAssemblyInfoFilePath = assemblyInfoFile,
+               OutputType = GitVersionOutput.BuildServer
+             });
 });
 
-//////////////////////////////////////////////////////////////////////
-// TASK TARGETS
-//////////////////////////////////////////////////////////////////////
+Task("Restore")
+  .Does(() =>
+{
+  Information($"Restoring packages for {MakeAbsolute(solutionFile)}");
 
-Task("Clean")
-  .IsDependentOn("Clean:Templates")
-  .IsDependentOn("Clean:Artifacts");
-
-Task("Build")
-  .IsDependentOn("Clean")
-  .IsDependentOn("Build:Templates")
-  .IsDependentOn("Build:Artifacts");
-
-//////////////////////////////////////////////////////////////////////
-// EXECUTION
-//////////////////////////////////////////////////////////////////////
+  NuGetRestore(solutionFile);
+});
 
 var targetArgument = Argument("target", "Build");
 RunTarget(targetArgument);
