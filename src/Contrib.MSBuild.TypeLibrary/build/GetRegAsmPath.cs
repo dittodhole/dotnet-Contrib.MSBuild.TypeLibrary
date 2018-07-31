@@ -2,6 +2,8 @@
 using Microsoft.Build.Utilities;
 
 // ReSharper disable CheckNamespace
+// ReSharper disable MemberCanBeProtected.Global
+// ReSharper disable MemberCanBePrivate.Global
 
 namespace Contrib.MSBuild.TypeLibrary
 {
