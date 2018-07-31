@@ -55,4 +55,8 @@
     <None Include="Contrib.MSBuild.TypeLibrary.nuspec" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <ContribMSBuildTypeLibraryPropsFile>$(ProjectDir)content\Contrib.MSBuild.TypeLibrary.props</ContribMSBuildTypeLibraryPropsFile>
+  </PropertyGroup>
+  <Import Project="build\Contrib.MSBuild.TypeLibrary.targets" />
 </Project>
