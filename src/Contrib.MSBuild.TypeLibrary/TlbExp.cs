@@ -37,9 +37,32 @@ namespace Contrib.MSBuild.TypeLibrary
       var commandLineBuilder = new CommandLineBuilder();
 
       commandLineBuilder.AppendFileNameIfNotNull(this.Assembly);
-      commandLineBuilder.AppendSwitchIfNotNull("/out:", System.IO.Path.ChangeExtension(this.Assembly.ItemSpec, ".tlb"));
+      commandLineBuilder.AppendSwitchIfNotNull("/out:", TlbExp.GetRegFileTaskItem(this.Assembly));
 
       var result = commandLineBuilder.ToString();
+
+      return result;
+    }
+
+    /// <inheritdoc/>
+    public override bool Execute()
+    {
+      var result = base.Execute();
+      if (result)
+      {
+        this.OutputFile = TlbExp.GetRegFileTaskItem(this.Assembly);
+      }
+
+      return result;
+    }
+
+    [NotNull]
+    private static ITaskItem GetRegFileTaskItem([NotNull] ITaskItem assembly)
+    {
+      var result = new TaskItem(assembly)
+                   {
+                     ItemSpec = System.IO.Path.ChangeExtension(assembly.ItemSpec, ".tlb")
+                   };
 
       return result;
     }
