@@ -27,11 +27,13 @@
             ToolExe="$(ContribMSBuildTypeLibrary_TlbExpExe)"
             ToolPath="$(ContribMSBuildTypeLibrary_TlbExpPath)">
       <Output TaskParameter="OutputFile" ItemName="FileWrites" />
+      <Output TaskParameter="OutputFile" ItemName="ContribMSBuildTypeLibrary_OutputFile" />
     </TlbExp>
     <RegAsm Assembly="@(ContribMSBuildTypeLibrary_SourceAssembly)"
             ToolExe="$(ContribMSBuildTypeLibrary_RegAsmExe)"
             ToolPath="$(ContribMSBuildTypeLibrary_RegAsmPath)">
       <Output TaskParameter="OutputFile" ItemName="FileWrites" />
+      <Output TaskParameter="OutputFile" ItemName="ContribMSBuildTypeLibrary_OutputFile" />
     </RegAsm>
   </Target>
 </Project>
