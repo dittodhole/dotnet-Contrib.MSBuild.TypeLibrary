@@ -35,6 +35,8 @@ You can override following properties with `Directory.Build.props`:
 - `ContribMSBuildTypeLibrary_RegAsmPath`
 - `ContribMSBuildTypeLibrary_TlbExpExe`
 - `ContribMSBuildTypeLibrary_TlbExpPath`
+- `ContribMSBuildTypeLibrary_CreateTypeLibrary_BeforeTargets`
+- `ContribMSBuildTypeLibrary_CreateTypeLibrary_AfterTargets` (default: `CopyFilesToOutputDirectory`)
 
 
 ## Developing & Building
