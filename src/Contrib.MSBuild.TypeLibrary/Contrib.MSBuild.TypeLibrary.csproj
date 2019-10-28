@@ -14,7 +14,6 @@
     <developmentDependency>true</developmentDependency>
     <PackageDescription>Create .tlb-files (Type Library) upon compilation.</PackageDescription>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
-    <IncludeSource>true</IncludeSource>
     <PackageProjectUrl>https://github.com/dittodhole/dotnet-Contrib.MSBuild.TypeLibrary</PackageProjectUrl>
     <PackageIcon>noun_181229_cc.png</PackageIcon>
     <PackageTags />
