@@ -4,25 +4,38 @@
 
 > Create _.tlb_-files ([Type Library](https://msdn.microsoft.com/en-us/library/windows/desktop/aa366757)) upon compilation.
 
+## Build status
+
+[![](https://img.shields.io/appveyor/ci/dittodhole/dotnet-contrib-msbuild-typelibrary.svg)](https://ci.appveyor.com/project/dittodhole/dotnet-contrib-msbuild-typelibrary)
+
 ## Installing
 
-### [myget.org][1]
+### myget.org
 
-[![](https://img.shields.io/appveyor/ci/dittodhole/dotnet-contrib-msbuild-typelibrary/develop.svg)][2]
-[![](https://img.shields.io/myget/dittodhole/vpre/Contrib.MSBuild.TypeLibrary.svg)][1]
+[![](https://img.shields.io/myget/dittodhole/vpre/Contrib.MSBuild.TypeLibrary.svg)](https://www.myget.org/feed/dittodhole/package/nuget/Contrib.MSBuild.TypeLibrary)
 
 ```powershell
 PM> Install-Package -Id Contrib.MSBuild.TypeLibrary -pre --source https://www.myget.org/F/dittodhole/api/v2
 ```
 
-### [nuget.org][3]
+### nuget.org
 
-[![](https://img.shields.io/appveyor/ci/dittodhole/dotnet-contrib-msbuild-typelibrary/master.svg)][4]
-[![](https://img.shields.io/nuget/v/Contrib.MSBuild.TypeLibrary.svg)][3]
+[![](https://img.shields.io/nuget/v/Contrib.MSBuild.TypeLibrary.svg)](https://www.nuget.org/packages/Contrib.MSBuild.TypeLibrary)
 
 ```powershell
 PM> Install-Package -Id Contrib.MSBuild.TypeLibrary
 ```
+
+## Configuration
+
+You can override following properties with `Directory.Build.props`:
+
+- `ContribMSBuildTypeLibrary_Active` (default: `true` on release builds, otherwise `false`)
+- `ContribMSBuildTypeLibrary_RegAsmExe`
+- `ContribMSBuildTypeLibrary_RegAsmPath`
+- `ContribMSBuildTypeLibrary_TlbExpExe`
+- `ContribMSBuildTypeLibrary_TlbExpPath`
+
 
 ## Developing & Building
 
@@ -36,7 +49,6 @@ dotnet-Contrib.MSBuild.TypeLibrary/build> build.bat
 This will create the following artifacts:
 
 - `artifacts/Contrib.MSBuild.TypeLibrary.{version}.nupkg`
-- `artifacts/Contrib.MSBuild.TypeLibrary.{version}.symbols.nupkg`
 
 ## License
 
@@ -45,8 +57,3 @@ dotnet-Contrib.MSBuild.TypeLibrary is published under [WTFNMFPLv3](https://githu
 ## Icon
 
 [Interoperability](https://thenounproject.com/term/interoperability/181229) by [anbileru adaleru](https://thenounproject.com/pronoun) from the Noun Project.
-
-[1]: https://www.myget.org/feed/dittodhole/package/nuget/Contrib.MSBuild.TypeLibrary
-[2]: https://ci.appveyor.com/project/dittodhole/dotnet-contrib-msbuild-typelibrary/branch/develop
-[3]: https://www.nuget.org/packages/Contrib.MSBuild.TypeLibrary
-[4]: https://ci.appveyor.com/project/dittodhole/dotnet-contrib-msbuild-typelibrary/branch/master
