@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ContribMSBuildTypeLibrary_Active>False</ContribMSBuildTypeLibrary_Active>
+    <ContribMSBuildTypeLibrary_Active Condition="'$(Configuration)' == 'Release'">True</ContribMSBuildTypeLibrary_Active>
+    <ContribMSBuildTypeLibrary_Assembly Condition="'$(ContribMSBuildTypeLibrary_Assembly)' == '' And '$(MSBuildRuntimeType)' == 'Full'">$(MSBuildThisFileDirectory)..\tasks\net46\Contrib.MSBuild.TypeLibrary.dll</ContribMSBuildTypeLibrary_Assembly>
+    <ContribMSBuildTypeLibrary_Assembly Condition="'$(ContribMSBuildTypeLibrary_Assembly)' == '' And '$(MSBuildRuntimeType)' == 'Core'">$(MSBuildThisFileDirectory)..\tasks\netstandard2.0\Contrib.MSBuild.TypeLibrary.dll</ContribMSBuildTypeLibrary_Assembly>
+  </PropertyGroup>
+</Project>
