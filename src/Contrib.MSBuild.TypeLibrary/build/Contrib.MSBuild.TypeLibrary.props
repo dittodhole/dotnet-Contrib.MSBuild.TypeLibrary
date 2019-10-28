@@ -5,5 +5,6 @@
     <ContribMSBuildTypeLibrary_Active Condition="'$(Configuration)' == 'Release'">True</ContribMSBuildTypeLibrary_Active>
     <ContribMSBuildTypeLibrary_Assembly Condition="'$(ContribMSBuildTypeLibrary_Assembly)' == '' And '$(MSBuildRuntimeType)' == 'Full'">$(MSBuildThisFileDirectory)..\tasks\net46\Contrib.MSBuild.TypeLibrary.dll</ContribMSBuildTypeLibrary_Assembly>
     <ContribMSBuildTypeLibrary_Assembly Condition="'$(ContribMSBuildTypeLibrary_Assembly)' == '' And '$(MSBuildRuntimeType)' == 'Core'">$(MSBuildThisFileDirectory)..\tasks\netstandard2.0\Contrib.MSBuild.TypeLibrary.dll</ContribMSBuildTypeLibrary_Assembly>
+    <ContribMSBuildTypeLibrary_CreateTypeLibrary_AfterTargets Condition="'$(ContribMSBuildTypeLibrary_CreateTypeLibrary_AfterTargets)' == ''">CopyFilesToOutputDirectory</ContribMSBuildTypeLibrary_CreateTypeLibrary_AfterTargets>
   </PropertyGroup>
 </Project>

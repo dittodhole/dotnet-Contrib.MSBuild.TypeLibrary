@@ -2,7 +2,7 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <UsingTask TaskName="TlbExp" AssemblyFile="$(ContribMSBuildTypeLibrary_Assembly)" />
   <UsingTask TaskName="RegAsm" AssemblyFile="$(ContribMSBuildTypeLibrary_Assembly)" />
-  <Target Name="CreateTypeLibrary" AfterTargets="CopyFilesToOutputDirectory" Condition="'$(ContribMSBuildTypeLibrary_Active)' == 'True'">
+  <Target Name="CreateTypeLibrary" BeforeTargets="$(ContribMSBuildTypeLibrary_CreateTypeLibrary_BeforeTargets)" AfterTargets="$(ContribMSBuildTypeLibrary_CreateTypeLibrary_AfterTargets)" Condition="'$(ContribMSBuildTypeLibrary_Active)' == 'True'">
     <ItemGroup>
       <ContribMSBuildTypeLibrary_SourceAssembly Condition="'@(ContribMSBuildTypeLibrary_SourceAssembly)' == ''" Include="$(TargetPath)" />
     </ItemGroup>
@@ -15,6 +15,8 @@
     <Message Text="MSBuildToolsPath:           $(MSBuildToolsPath)"/>
     <Message Text="MSBuildToolsVersion:        $(MSBuildToolsVersion)" />
     <Message Text="MSBuildVersion:             $(MSBuildVersion)" />
+    <Message Text="_BeforeTargets:             $(ContribMSBuildTypeLibrary_CreateTypeLibrary_BeforeTargets)" />
+    <Message Text="_AfterTargets:              $(ContribMSBuildTypeLibrary_CreateTypeLibrary_AfterTargets)" />
     <Message Text="_Assembly:                  $(ContribMSBuildTypeLibrary_Assembly)" />
     <Message Text="_SourceAssembly:            %(ContribMSBuildTypeLibrary_SourceAssembly.Identity)" />
     <Message Text="_RegAsmExe:                 $(ContribMSBuildTypeLibrary_RegAsmExe)" />

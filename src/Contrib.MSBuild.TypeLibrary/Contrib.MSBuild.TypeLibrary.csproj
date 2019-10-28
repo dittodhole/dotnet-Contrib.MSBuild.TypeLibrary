@@ -89,6 +89,8 @@
       <CreateTypeLibraryProperties>
         ContribMSBuildTypeLibrary_Active=$(ContribMSBuildTypeLibrary_Active);
         ContribMSBuildTypeLibrary_Assembly=$(ContribMSBuildTypeLibrary_Assembly);
+        ContribMSBuildTypeLibrary_CreateTypeLibrary_BeforeTargets=$(ContribMSBuildTypeLibrary_CreateTypeLibrary_BeforeTargets);
+        ContribMSBuildTypeLibrary_CreateTypeLibrary_AfterTargets=$(ContribMSBuildTypeLibrary_CreateTypeLibrary_AfterTargets);
         TargetPath=$(TargetPath);
         ContribMSBuildTypeLibrary_RegAsmExe=$(ContribMSBuildTypeLibrary_RegAsmExe);
         ContribMSBuildTypeLibrary_RegAsmPath=$(ContribMSBuildTypeLibrary_RegAsmPath);
