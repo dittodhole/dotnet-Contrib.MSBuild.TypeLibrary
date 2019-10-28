@@ -37,9 +37,32 @@ namespace Contrib.MSBuild.TypeLibrary
       var commandLineBuilder = new CommandLineBuilder();
 
       commandLineBuilder.AppendFileNameIfNotNull(this.Assembly);
-      commandLineBuilder.AppendSwitchIfNotNull("/regfile:", System.IO.Path.ChangeExtension(this.Assembly.ItemSpec, ".reg"));
+      commandLineBuilder.AppendSwitchIfNotNull("/regfile:", RegAsm.GetRegFileTaskItem(this.Assembly));
 
       var result = commandLineBuilder.ToString();
+
+      return result;
+    }
+
+    /// <inheritdoc/>
+    public override bool Execute()
+    {
+      var result = base.Execute();
+      if (result)
+      {
+        this.OutputFile = RegAsm.GetRegFileTaskItem(this.Assembly);
+      }
+
+      return result;
+    }
+
+    [NotNull]
+    private static ITaskItem GetRegFileTaskItem([NotNull] ITaskItem assembly)
+    {
+      var result = new TaskItem(assembly)
+                   {
+                     ItemSpec = System.IO.Path.ChangeExtension(assembly.ItemSpec, ".reg")
+                   };
 
       return result;
     }
