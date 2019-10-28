@@ -82,14 +82,14 @@
       <RepositoryCommit>$(GitVersion_Sha)</RepositoryCommit>
     </PropertyGroup>
   </Target>
+  <!--
   <Target Name="CreateTypeLibrary" AfterTargets="CopyFilesToOutputDirectory">
     <PropertyGroup>
       <ContribMSBuildTypeLibrary_Assembly>$(TargetPath)</ContribMSBuildTypeLibrary_Assembly>
-      <ContribMSBuildTypeLibrary_Source>$(TargetPath)</ContribMSBuildTypeLibrary_Source>
       <CreateTypeLibraryProperties>
         ContribMSBuildTypeLibrary_Active=$(ContribMSBuildTypeLibrary_Active);
         ContribMSBuildTypeLibrary_Assembly=$(ContribMSBuildTypeLibrary_Assembly);
-        ContribMSBuildTypeLibrary_Source=$(ContribMSBuildTypeLibrary_Source);
+        TargetPath=$(TargetPath);
         ContribMSBuildTypeLibrary_RegAsmExe=$(ContribMSBuildTypeLibrary_RegAsmExe);
         ContribMSBuildTypeLibrary_RegAsmPath=$(ContribMSBuildTypeLibrary_RegAsmPath);
         ContribMSBuildTypeLibrary_TlbExpExe=$(ContribMSBuildTypeLibrary_TlbExpExe);
@@ -101,4 +101,5 @@
              Properties="$(CreateTypeLibraryProperties)"
              Targets="CreateTypeLibrary" />
   </Target>
+  -->
 </Project>

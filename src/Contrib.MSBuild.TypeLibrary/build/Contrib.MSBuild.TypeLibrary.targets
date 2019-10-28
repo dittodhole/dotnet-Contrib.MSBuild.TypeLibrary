@@ -3,9 +3,9 @@
   <UsingTask TaskName="TlbExp" AssemblyFile="$(ContribMSBuildTypeLibrary_Assembly)" />
   <UsingTask TaskName="RegAsm" AssemblyFile="$(ContribMSBuildTypeLibrary_Assembly)" />
   <Target Name="CreateTypeLibrary" AfterTargets="CopyFilesToOutputDirectory" Condition="'$(ContribMSBuildTypeLibrary_Active)' == 'True'">
-    <PropertyGroup>
-      <ContribMSBuildTypeLibrary_Source Condition="'$(ContribMSBuildTypeLibrary_Source)' == ''">$(TargetPath)</ContribMSBuildTypeLibrary_Source>
-    </PropertyGroup>
+    <ItemGroup>
+      <ContribMSBuildTypeLibrary_SourceAssembly Condition="'@(ContribMSBuildTypeLibrary_SourceAssembly)' == ''" Include="$(TargetPath)" />
+    </ItemGroup>
     <Message Text="MSBuildBinPath:             $(MSBuildBinPath)" />
     <Message Text="MSBuildExtensionsPath:      $(MSBuildExtensionsPath)" />
     <Message Text="MSBuildExtensionsPath32:    $(MSBuildExtensionsPath32)" />
@@ -16,16 +16,20 @@
     <Message Text="MSBuildToolsVersion:        $(MSBuildToolsVersion)" />
     <Message Text="MSBuildVersion:             $(MSBuildVersion)" />
     <Message Text="_Assembly:                  $(ContribMSBuildTypeLibrary_Assembly)" />
-    <Message Text="_Source:                    $(ContribMSBuildTypeLibrary_Source)" />
+    <Message Text="_SourceAssembly:            %(ContribMSBuildTypeLibrary_SourceAssembly.Identity)" />
     <Message Text="_RegAsmExe:                 $(ContribMSBuildTypeLibrary_RegAsmExe)" />
     <Message Text="_RegAsmPath:                $(ContribMSBuildTypeLibrary_RegAsmPath)" />
     <Message Text="_TlbExpExe:                 $(ContribMSBuildTypeLibrary_TlbExpExe)" />
     <Message Text="_TlbExpPath:                $(ContribMSBuildTypeLibrary_TlbExpPath)" />
-    <TlbExp Target="$(ContribMSBuildTypeLibrary_Source)"
+    <TlbExp Assembly="@(ContribMSBuildTypeLibrary_SourceAssembly)"
             ToolExe="$(ContribMSBuildTypeLibrary_TlbExpExe)"
-            ToolPath="$(ContribMSBuildTypeLibrary_TlbExpPath)" />
-    <RegAsm Target="$(ContribMSBuildTypeLibrary_Source)"
+            ToolPath="$(ContribMSBuildTypeLibrary_TlbExpPath)">
+      <Output TaskParameter="OutputFile" ItemName="FileWrites" />
+    </TlbExp>
+    <RegAsm Assembly="@(ContribMSBuildTypeLibrary_SourceAssembly)"
             ToolExe="$(ContribMSBuildTypeLibrary_RegAsmExe)"
-            ToolPath="$(ContribMSBuildTypeLibrary_RegAsmPath)" />
+            ToolPath="$(ContribMSBuildTypeLibrary_RegAsmPath)">
+      <Output TaskParameter="OutputFile" ItemName="FileWrites" />
+    </RegAsm>
   </Target>
 </Project>

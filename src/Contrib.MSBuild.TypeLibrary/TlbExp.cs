@@ -8,7 +8,11 @@ namespace Contrib.MSBuild.TypeLibrary
   {
     [Required]
     [NotNull]
-    public string Target { get; set; }
+    public ITaskItem Assembly { get; set; }
+
+    [Output]
+    [NotNull]
+    public ITaskItem OutputFile { get; set; }
 
     /// <inheritdoc/>
     protected override string GenerateFullPathToTool()
@@ -32,8 +36,8 @@ namespace Contrib.MSBuild.TypeLibrary
     {
       var commandLineBuilder = new CommandLineBuilder();
 
-      commandLineBuilder.AppendFileNameIfNotNull(this.Target);
-      commandLineBuilder.AppendSwitchIfNotNull("/out:", System.IO.Path.ChangeExtension(this.Target, ".tlb"));
+      commandLineBuilder.AppendFileNameIfNotNull(this.Assembly);
+      commandLineBuilder.AppendSwitchIfNotNull("/out:", System.IO.Path.ChangeExtension(this.Assembly.ItemSpec, ".tlb"));
 
       var result = commandLineBuilder.ToString();
 
