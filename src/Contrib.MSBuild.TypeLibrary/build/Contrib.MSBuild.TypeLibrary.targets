@@ -35,5 +35,6 @@
       <Output TaskParameter="OutputFile" ItemName="FileWrites" />
       <Output TaskParameter="OutputFile" ItemName="ContribMSBuildTypeLibrary_OutputFile" />
     </RegAsm>
+    <Message Text="_OutputFile:                %(ContribMSBuildTypeLibrary_OutputFile.Identity)" />
   </Target>
 </Project>
