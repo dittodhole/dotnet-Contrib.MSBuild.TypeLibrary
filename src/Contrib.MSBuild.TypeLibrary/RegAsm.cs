@@ -1,18 +1,15 @@
 ﻿using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
-using JetBrains.Annotations;
 
 namespace Contrib.MSBuild.TypeLibrary
 {
   public sealed class RegAsm : ToolTask
   {
     [Required]
-    [NotNull]
     public ITaskItem Assembly { get; set; }
 
     [Output]
-    [NotNull]
-    public ITaskItem OutputFile { get; set; }
+    public ITaskItem RegFile { get; set; }
 
     /// <inheritdoc/>
     protected override string GenerateFullPathToTool()
@@ -50,14 +47,13 @@ namespace Contrib.MSBuild.TypeLibrary
       var result = base.Execute();
       if (result)
       {
-        this.OutputFile = RegAsm.GetRegFileTaskItem(this.Assembly);
+        this.RegFile = RegAsm.GetRegFileTaskItem(this.Assembly);
       }
 
       return result;
     }
 
-    [NotNull]
-    private static ITaskItem GetRegFileTaskItem([NotNull] ITaskItem assembly)
+    private static ITaskItem GetRegFileTaskItem(ITaskItem assembly)
     {
       var result = new TaskItem(assembly)
                    {
