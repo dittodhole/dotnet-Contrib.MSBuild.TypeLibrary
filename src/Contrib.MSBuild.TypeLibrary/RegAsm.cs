@@ -9,7 +9,7 @@ namespace Contrib.MSBuild.TypeLibrary
     public ITaskItem Assembly { get; set; }
 
     [Output]
-    public ITaskItem OutputFile { get; set; }
+    public ITaskItem RegFile { get; set; }
 
     /// <inheritdoc/>
     protected override string GenerateFullPathToTool()
@@ -47,7 +47,7 @@ namespace Contrib.MSBuild.TypeLibrary
       var result = base.Execute();
       if (result)
       {
-        this.OutputFile = RegAsm.GetRegFileTaskItem(this.Assembly);
+        this.RegFile = RegAsm.GetRegFileTaskItem(this.Assembly);
       }
 
       return result;
