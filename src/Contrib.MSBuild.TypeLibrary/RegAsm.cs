@@ -1,17 +1,14 @@
 ﻿using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
-using JetBrains.Annotations;
 
 namespace Contrib.MSBuild.TypeLibrary
 {
   public sealed class RegAsm : ToolTask
   {
     [Required]
-    [NotNull]
     public ITaskItem Assembly { get; set; }
 
     [Output]
-    [NotNull]
     public ITaskItem OutputFile { get; set; }
 
     /// <inheritdoc/>
@@ -56,8 +53,7 @@ namespace Contrib.MSBuild.TypeLibrary
       return result;
     }
 
-    [NotNull]
-    private static ITaskItem GetRegFileTaskItem([NotNull] ITaskItem assembly)
+    private static ITaskItem GetRegFileTaskItem(ITaskItem assembly)
     {
       var result = new TaskItem(assembly)
                    {
