@@ -41,6 +41,10 @@
     <PackageReference Update="@(PackageReference)">
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
+    <PackageReference Update="GitVersionTask" Version="5.1.2">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="build\Contrib.MSBuild.TypeLibrary.props">
@@ -70,16 +74,6 @@
       <PackagePath></PackagePath>
     </None>
   </ItemGroup>
-  <Target Name="UpdateRepositoryBranch" AfterTargets="GetVersion">
-    <PropertyGroup>
-      <RepositoryBranch>$(GitVersion_BranchName)</RepositoryBranch>
-    </PropertyGroup>
-  </Target>
-  <Target Name="UpdateRepositoryCommit" AfterTargets="GetVersion">
-    <PropertyGroup>
-      <RepositoryCommit>$(GitVersion_Sha)</RepositoryCommit>
-    </PropertyGroup>
-  </Target>
   <!--
   <Target Name="CreateTypeLibrary" AfterTargets="CopyFilesToOutputDirectory">
     <PropertyGroup>
